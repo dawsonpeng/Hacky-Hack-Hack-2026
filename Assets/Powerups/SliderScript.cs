@@ -6,16 +6,16 @@ public class SliderScript : MonoBehaviour
     public int lowestValue;
     public int highestValue;
 
-    public void OnCoinPowerup(CoinPowerup coinPowerup)
+    public void OnCoinPowerup(powerupScript powerup)
     {
-        if (coinPowerup == null)
+        if (powerup == null)
         {
             return;
         }
 
         hasPowerup = true;
-        lowestValue = coinPowerup.lowestValue;
-        highestValue = coinPowerup.highestValue;
+        lowestValue = powerup.lowestValue;
+        highestValue = powerup.highestValue;
         Debug.Log($"Slider powerup received: {lowestValue}-{highestValue}");
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
