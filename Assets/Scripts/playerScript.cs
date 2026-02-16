@@ -11,10 +11,14 @@ public class playerScript : MonoBehaviour
     public LayerMask groundLayer;
 
     public bool IsGrounded;
+
+    private SpriteRenderer spriteRenderer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -32,6 +36,19 @@ public class playerScript : MonoBehaviour
     private void FixedUpdate()
     {
         IsGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Death")
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        spriteRenderer.color = Color.red;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
 }
