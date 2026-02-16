@@ -11,10 +11,21 @@ public class playerScript : MonoBehaviour
     public LayerMask groundLayer;
 
     public bool IsGrounded;
+    [SerializeField] private SliderScript sliderScript;
+    [SerializeField] private ToggleScript toggleScript;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        if (sliderScript == null)
+        {
+            sliderScript = FindObjectOfType<SliderScript>();
+        }
+
+        if (toggleScript == null)
+        {
+            toggleScript = FindObjectOfType<ToggleScript>();
+        }
     }
 
     // Update is called once per frame
@@ -34,4 +45,29 @@ public class playerScript : MonoBehaviour
         IsGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        CoinPowerup coinPowerup = other.GetComponent<CoinPowerup>();
+        if (coinPowerup == null)
+        {
+            return;
+        }
+
+        coinPowerup.OnCollected();
+
+        if (coinPowerup.isSlider)
+        {
+            if (sliderScript != null)
+            {
+                sliderScript.OnCoinPowerup(coinPowerup);
+            }
+        }
+        else
+        {
+            if (toggleScript != null)
+            {
+                toggleScript.OnCoinPowerup(coinPowerup);
+            }
+        }
+    }
 }
