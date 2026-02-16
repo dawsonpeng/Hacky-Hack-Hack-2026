@@ -38,7 +38,7 @@ public class playerScript : MonoBehaviour
         float movement = Input.GetAxis("Horizontal");
         body.linearVelocity = new Vector2(movement * moveSpeed, body.linearVelocity.y);
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded)
+        if (Input.GetKeyDown(KeyCode.W) && IsGrounded)
         {
             body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
         }
