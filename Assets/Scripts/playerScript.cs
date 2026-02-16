@@ -16,6 +16,9 @@ public class playerScript : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    public int extraJumpsValue = 1;
+    private int extraJumps;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,6 +33,8 @@ public class playerScript : MonoBehaviour
             toggleScript = FindObjectOfType<ToggleScript>();
         }
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        extraJumps = extraJumpsValue;
     }
 
     // Update is called once per frame
@@ -38,9 +43,20 @@ public class playerScript : MonoBehaviour
         float movement = Input.GetAxis("Horizontal");
         body.linearVelocity = new Vector2(movement * moveSpeed, body.linearVelocity.y);
 
-        if (Input.GetKeyDown(KeyCode.W) && IsGrounded)
+        if (IsGrounded)
         {
-            body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
+            extraJumps = extraJumpsValue;
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            if(IsGrounded) {
+                body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
+            } else if (extraJumps > 0) {
+                body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
+                extraJumps--;
+            }
+            
         }
     }
     
