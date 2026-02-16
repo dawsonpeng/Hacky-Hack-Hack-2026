@@ -51,26 +51,30 @@ public class playerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        CoinPowerup coinPowerup = other.GetComponent<CoinPowerup>();
-        if (coinPowerup == null)
+        powerupScript powerup = other.GetComponent<powerupScript>();
+        if (powerup == null)
         {
             return;
         }
 
-        coinPowerup.OnCollected();
+        Debug.Log(powerup.isSlider
+            ? $"Powerup hit: slider {powerup.lowestValue}-{powerup.highestValue}"
+            : $"Powerup hit: toggle isActive={powerup.isActive}");
 
-        if (coinPowerup.isSlider)
+        powerup.OnCollected();
+
+        if (powerup.isSlider)
         {
             if (sliderScript != null)
             {
-                sliderScript.OnCoinPowerup(coinPowerup);
+                sliderScript.OnCoinPowerup(powerup);
             }
         }
         else
         {
             if (toggleScript != null)
             {
-                toggleScript.OnCoinPowerup(coinPowerup);
+                toggleScript.OnCoinPowerup(powerup);
             }
         }
     }

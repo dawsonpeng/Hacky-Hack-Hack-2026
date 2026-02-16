@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class CoinPowerup : MonoBehaviour
+public class powerupScript : MonoBehaviour
 {
     public bool isSlider = true;
     public int lowestValue = 0;
     public int highestValue = 100;
     public bool isActive = true;
 
-    [SerializeField] private SpriteRenderer powerupRenderer;
-    [SerializeField] private Collider2D triggerCollider;
+    [SerializeField] protected SpriteRenderer powerupRenderer;
+    [SerializeField] protected Collider2D triggerCollider;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (powerupRenderer == null)
         {
@@ -23,7 +23,7 @@ public class CoinPowerup : MonoBehaviour
         }
     }
 
-    public void OnCollected()
+    public virtual void OnCollected()
     {
         if (powerupRenderer != null)
         {

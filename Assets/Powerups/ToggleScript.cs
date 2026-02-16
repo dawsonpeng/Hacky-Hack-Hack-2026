@@ -5,15 +5,15 @@ public class ToggleScript : MonoBehaviour
     public bool hasPowerup;
     public bool isActive;
 
-    public void OnCoinPowerup(CoinPowerup coinPowerup)
+    public void OnCoinPowerup(powerupScript powerup)
     {
-        if (coinPowerup == null)
+        if (powerup == null)
         {
             return;
         }
 
         hasPowerup = true;
-        isActive = coinPowerup.isActive;
+        isActive = powerup.isActive;
         Debug.Log($"Toggle powerup received: isActive={isActive}");
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
