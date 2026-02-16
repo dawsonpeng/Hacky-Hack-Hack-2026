@@ -772,7 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3989e79884cb24ca7e5cd1c1368767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  flapStrength: 8
+  flapStrength: 10
   moveSpeed: 5
   groundCheck: {fileID: 1079001532}
   groundCheckRadius: 0.2
