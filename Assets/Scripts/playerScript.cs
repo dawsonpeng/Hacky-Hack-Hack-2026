@@ -13,6 +13,9 @@ public class playerScript : MonoBehaviour
     public bool IsGrounded;
     [SerializeField] private SliderScript sliderScript;
     [SerializeField] private ToggleScript toggleScript;
+
+    private SpriteRenderer spriteRenderer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +29,7 @@ public class playerScript : MonoBehaviour
         {
             toggleScript = FindObjectOfType<ToggleScript>();
         }
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -70,4 +74,17 @@ public class playerScript : MonoBehaviour
             }
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Death")
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        spriteRenderer.color = Color.red;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
 }
