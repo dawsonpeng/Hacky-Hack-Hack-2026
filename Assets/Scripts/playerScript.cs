@@ -7,6 +7,8 @@ public class playerScript : MonoBehaviour
     public float flapStrength;
     public float moveSpeed = 5f;
     private Rigidbody2D body;
+    [SerializeField] private bool applyNoFrictionMaterial = true;
+    private PhysicsMaterial2D noFrictionMaterial;
 
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
@@ -28,6 +30,10 @@ public class playerScript : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        if (applyNoFrictionMaterial)
+        {
+            ApplyNoFrictionMaterial();
+        }
         if (sliderScript == null)
         {
             sliderScript = FindObjectOfType<SliderScript>();
@@ -45,6 +51,24 @@ public class playerScript : MonoBehaviour
         ApplySelectedCharacterSprite();
 
         extraJumps = extraJumpsValue;
+    }
+
+    private void ApplyNoFrictionMaterial()
+    {
+        if (noFrictionMaterial == null)
+        {
+            noFrictionMaterial = new PhysicsMaterial2D("PlayerNoFriction")
+            {
+                friction = 0f,
+                bounciness = 0f
+            };
+        }
+
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            colliders[i].sharedMaterial = noFrictionMaterial;
+        }
     }
 
     // Update is called once per frame
