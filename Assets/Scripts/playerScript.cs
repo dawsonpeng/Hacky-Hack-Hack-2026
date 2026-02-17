@@ -2,22 +2,27 @@ using UnityEngine;
 
 public class playerScript : MonoBehaviour
 {
+    private const string SelectedCharacterKey = "SelectedCharacter";
+
     public float flapStrength;
     public float moveSpeed = 5f;
     private Rigidbody2D body;
 
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
-    public LayerMask groundLayer;
+    [SerializeField] private string groundTag = "Ground";
 
     public bool IsGrounded;
     [SerializeField] private SliderScript sliderScript;
     [SerializeField] private ToggleScript toggleScript;
 
     private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite chen_0Sprite;
+    [SerializeField] private Sprite maleIdleSprite;
 
     public int extraJumpsValue = 1;
     private int extraJumps;
+    private int groundContacts;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,6 +38,11 @@ public class playerScript : MonoBehaviour
             toggleScript = FindObjectOfType<ToggleScript>();
         }
         spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+        ApplySelectedCharacterSprite();
 
         extraJumps = extraJumpsValue;
     }
@@ -60,16 +70,16 @@ public class playerScript : MonoBehaviour
         }
     }
     
-    private void FixedUpdate()
-    {
-        IsGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         powerupScript powerup = other.GetComponent<powerupScript>();
         if (powerup == null)
         {
+            if (other.CompareTag(groundTag))
+            {
+                groundContacts++;
+                IsGrounded = groundContacts > 0;
+            }
             return;
         }
 
@@ -94,6 +104,15 @@ public class playerScript : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag(groundTag))
+        {
+            groundContacts = Mathf.Max(0, groundContacts - 1);
+            IsGrounded = groundContacts > 0;
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Death")
         {
@@ -105,6 +124,23 @@ public class playerScript : MonoBehaviour
     {
         spriteRenderer.color = Color.red;
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    private void ApplySelectedCharacterSprite()
+    {
+        int selection = PlayerPrefs.GetInt(SelectedCharacterKey, 1);
+        Sprite selectedSprite = selection == 2 ? maleIdleSprite : chen_0Sprite;
+
+        if (selectedSprite == null)
+        {
+            Debug.LogWarning("playerScript: assign character sprites in the Inspector.");
+            return;
+        }
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = selectedSprite;
+        }
     }
 
 }
