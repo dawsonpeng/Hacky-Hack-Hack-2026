@@ -6066,7 +6066,7 @@ MonoBehaviour:
   extraJumpsValue: 1
   jumpSound: {fileID: 8300000, guid: c899f22444c074203bd6083777a09364, type: 3}
   landSound: {fileID: 8300000, guid: 303689360de84489a85f8bcfd0002ffb, type: 3}
-  deathSound: {fileID: 8300000, guid: 7b8611b34cb36457cbe24f1be04003b3, type: 3}
+  deathSound: {fileID: 8300000, guid: 61f8e32ed4a8f47139b44bae8639a9d6, type: 3}
 --- !u!212 &2145662905
 SpriteRenderer:
   serializedVersion: 2
@@ -6227,7 +6227,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
