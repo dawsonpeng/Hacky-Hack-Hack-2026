@@ -11852,7 +11852,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 43bdb3fbc33d7c8428dfb4d49cbb4466, type: 3}
+  m_Resource: {fileID: 8300000, guid: dfb43dbf6865dbf4a8da79ac3c217008, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -15462,6 +15462,9 @@ MonoBehaviour:
   landSound: {fileID: 8300000, guid: 303689360de84489a85f8bcfd0002ffb, type: 3}
   deathSound: {fileID: 8300000, guid: 7b8611b34cb36457cbe24f1be04003b3, type: 3}
   IsAlive: 1
+  squashAmount: 0.25
+  stretchAmount: 0.35
+  squashSpeed: 8
 --- !u!212 &2145662905
 SpriteRenderer:
   serializedVersion: 2
