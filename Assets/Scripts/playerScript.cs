@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class playerScript : MonoBehaviour
 {
@@ -34,6 +35,14 @@ public class playerScript : MonoBehaviour
     private bool LandSoundDebounce = false;
     public bool IsAlive = true;
 
+    public float squashAmount = 0.25f;
+    public float stretchAmount = 0.35f;
+    public float squashSpeed = 8f;
+
+    private Vector2 originalScale;
+    private Vector2 targetScale;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -44,12 +53,12 @@ public class playerScript : MonoBehaviour
         }
         if (sliderScript == null)
         {
-            sliderScript = FindObjectOfType<SliderScript>();
+            sliderScript = FindFirstObjectByType<SliderScript>();
         }
 
         if (toggleScript == null)
         {
-            toggleScript = FindObjectOfType<ToggleScript>();
+            toggleScript = FindFirstObjectByType<ToggleScript>();
         }
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
@@ -58,8 +67,9 @@ public class playerScript : MonoBehaviour
         }
         ApplySelectedCharacterSprite();
         extraJumps = extraJumpsValue;
-
         audioSource = GetComponent<AudioSource>();
+        originalScale = spriteRenderer.size;
+        targetScale = originalScale;
     }
 
     private void ApplyNoFrictionMaterial()
@@ -78,6 +88,44 @@ public class playerScript : MonoBehaviour
         {
             colliders[i].sharedMaterial = noFrictionMaterial;
         }
+    }
+
+    private void ResetDebounce()
+    {
+        LandSoundDebounce = false;
+    }
+
+    private void UpdateSlimeVisual()
+    {
+        float verticalVelocity = body.linearVelocity.y;
+
+        // Stretch when moving upward (jumping)
+        if (verticalVelocity > 0.1f)
+        {
+            targetScale = new Vector2(
+                originalScale.x - stretchAmount,
+                originalScale.y + stretchAmount
+            );
+        }
+        // Squash when landing / falling fast
+        else if (verticalVelocity < -3f)
+        {
+            targetScale = new Vector2(
+                originalScale.x - squashAmount,
+                originalScale.y + squashAmount
+            );
+        }
+        else
+        {
+            targetScale = originalScale;
+        }   
+
+        // Interpolate
+        spriteRenderer.size = Vector2.Lerp(
+            spriteRenderer.size,
+            targetScale,
+            Time.deltaTime * squashSpeed
+        );
     }
 
     // Update is called once per frame
@@ -108,6 +156,7 @@ public class playerScript : MonoBehaviour
                 }
             }
         }
+        UpdateSlimeVisual();
     }
 
     private void PlayAudio(AudioClip audioToPlay, float volume)
@@ -115,13 +164,7 @@ public class playerScript : MonoBehaviour
         audioSource.pitch = Random.Range(0.9f, 1.1f);
         audioSource.PlayOneShot(audioToPlay, volume);
     }
-
-    private void ResetDebounce()
-    {
-        LandSoundDebounce = false;
-    }
     
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!LandSoundDebounce)
@@ -138,6 +181,11 @@ public class playerScript : MonoBehaviour
             {
                 groundContacts++;
                 IsGrounded = groundContacts > 0;
+
+                spriteRenderer.size = new Vector2(
+                    originalScale.x + squashAmount * 1.5f,
+                    originalScale.y - squashAmount * 1.5f
+                );
             }
             return;
         }
@@ -192,10 +240,8 @@ public class playerScript : MonoBehaviour
             IsAlive = false;
             spriteRenderer.color = Color.red;
             PlayAudio(deathSound, 0.5f);
-            Invoke(nameof(ChangeScene), 2.0f);   
         }
-        spriteRenderer.color = Color.red;
-        SettingsScript settings = FindObjectOfType<SettingsScript>();
+        SettingsScript settings = FindFirstObjectByType<SettingsScript>();
         if (settings != null)
         {
             settings.SetTickSpeed(1f);
@@ -204,7 +250,7 @@ public class playerScript : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        Invoke(nameof(ChangeScene), 2.0f);   
     }
 
     private void ApplySelectedCharacterSprite()
@@ -223,5 +269,4 @@ public class playerScript : MonoBehaviour
             spriteRenderer.sprite = selectedSprite;
         }
     }
-
 }
