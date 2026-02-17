@@ -69,7 +69,7 @@ public class playerScript : MonoBehaviour
             
         }
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         powerupScript powerup = other.GetComponent<powerupScript>();

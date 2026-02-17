@@ -6,11 +6,13 @@ public class SettingsScript : MonoBehaviour
 {
     public Volume volume;
     private ColorAdjustments colorAdjust;
+    private float baseFixedDeltaTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         volume.profile.TryGet(out colorAdjust);
+        baseFixedDeltaTime = Time.fixedDeltaTime;
     }
 
     // Update is called once per frame
@@ -44,5 +46,12 @@ public class SettingsScript : MonoBehaviour
     public void ChangeBrightness(float value)
     {
         colorAdjust.postExposure.value = value;
+    }
+
+    // sets how fast the game updates (1 = normal, 0.5 = half speed, 2 = double speed)
+    public void SetTickSpeed(float tickSpeed)
+    {
+        Time.timeScale = tickSpeed;
+        Time.fixedDeltaTime = baseFixedDeltaTime * tickSpeed;
     }
 }
