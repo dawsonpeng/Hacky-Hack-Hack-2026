@@ -6,6 +6,8 @@ public class powerupScript : MonoBehaviour
     public int lowestValue = 0;
     public int highestValue = 100;
     public bool isActive = true;
+    // this variable stores any popUp that should appear whne we enter this power-up
+    public GameObject popUpWindow;
 
     [SerializeField] protected SpriteRenderer powerupRenderer;
     [SerializeField] protected Collider2D triggerCollider;
@@ -34,5 +36,14 @@ public class powerupScript : MonoBehaviour
         {
             triggerCollider.enabled = false;
         }
+        if (popUpWindow != null) {
+            CreatePopUp();
+        }
+    }
+
+    public void CreatePopUp()
+    {
+        Debug.Log("Pop Up Created");
+        popUpWindow.SetActive(true);
     }
 }
