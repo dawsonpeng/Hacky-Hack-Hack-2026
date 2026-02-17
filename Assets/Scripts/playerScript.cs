@@ -26,6 +26,14 @@ public class playerScript : MonoBehaviour
     private int extraJumps;
     private int groundContacts;
 
+    private AudioSource audioSource;
+    public AudioClip jumpSound;
+    public AudioClip landSound;
+    public AudioClip deathSound;
+
+    private bool LandSoundDebounce = false;
+    public bool IsAlive = true;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,8 +57,9 @@ public class playerScript : MonoBehaviour
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
         ApplySelectedCharacterSprite();
-
         extraJumps = extraJumpsValue;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void ApplyNoFrictionMaterial()
@@ -74,28 +83,54 @@ public class playerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float movement = Input.GetAxis("Horizontal");
-        body.linearVelocity = new Vector2(movement * moveSpeed, body.linearVelocity.y);
-
-        if (IsGrounded)
+        if (IsAlive)
         {
-            extraJumps = extraJumpsValue;
-        }
+            float movement = Input.GetAxis("Horizontal");
+            body.linearVelocity = new Vector2(movement * moveSpeed, body.linearVelocity.y);
 
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            if(IsGrounded) {
-                body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
-            } else if (extraJumps > 0) {
-                body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
-                extraJumps--;
+            if (IsGrounded)
+            {
+                extraJumps = extraJumpsValue;
             }
-            
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                if (IsGrounded)
+                {
+                    body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
+                    PlayAudio(jumpSound, 0.5f);
+                }
+                else if (extraJumps > 0)
+                {
+                    body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
+                    extraJumps--;
+                    PlayAudio(jumpSound, 0.5f);
+                }
+            }
         }
     }
 
+    private void PlayAudio(AudioClip audioToPlay, float volume)
+    {
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.PlayOneShot(audioToPlay, volume);
+    }
+
+    private void ResetDebounce()
+    {
+        LandSoundDebounce = false;
+    }
+    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (!LandSoundDebounce)
+        {
+            LandSoundDebounce = true;
+            PlayAudio(landSound, 0.1f);
+            Invoke(nameof(ResetDebounce), 1f);
+        }
+        
         powerupScript powerup = other.GetComponent<powerupScript>();
         if (powerup == null)
         {
@@ -137,15 +172,28 @@ public class playerScript : MonoBehaviour
             IsGrounded = groundContacts > 0;
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         if (collision.gameObject.tag == "Death")
         {
             Die();
         }
     }
+    
+    private void ChangeScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
 
     private void Die()
     {
+        if (IsAlive)
+        {
+            IsAlive = false;
+            spriteRenderer.color = Color.red;
+            PlayAudio(deathSound, 0.5f);
+            Invoke(nameof(ChangeScene), 2.0f);   
+        }
         spriteRenderer.color = Color.red;
         SettingsScript settings = FindObjectOfType<SettingsScript>();
         if (settings != null)
