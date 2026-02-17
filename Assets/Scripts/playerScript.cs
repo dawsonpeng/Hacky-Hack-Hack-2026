@@ -123,6 +123,15 @@ public class playerScript : MonoBehaviour
     private void Die()
     {
         spriteRenderer.color = Color.red;
+        SettingsScript settings = FindObjectOfType<SettingsScript>();
+        if (settings != null)
+        {
+            settings.SetTickSpeed(1f);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
