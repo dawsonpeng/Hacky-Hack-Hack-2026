@@ -32,6 +32,7 @@ public class SettingsScript : MonoBehaviour
 
     [ContextMenu("debright")]
     public void ToggleDay() {
+        Debug.Log("toggled day");
         if (colorAdjust.postExposure.value < 0) {
             ChangeBrightness(0f);
         } else {
