@@ -12,11 +12,16 @@ public class SettingsScript : MonoBehaviour
     public CinemachineCamera virtualCam;
     private float baseFixedDeltaTime;
 
+    [Header("Day/Night grounds")]
+    public GameObject lightground;
+    public GameObject darkground;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         volume.profile.TryGet(out colorAdjust);
         baseFixedDeltaTime = Time.fixedDeltaTime;
+        UpdateGroundVisibility();
     }
 
     // Update is called once per frame
@@ -44,6 +49,14 @@ public class SettingsScript : MonoBehaviour
         } else {
             ChangeBrightness(-4f);
         }
+        UpdateGroundVisibility();
+    }
+
+    private void UpdateGroundVisibility()
+    {
+        bool isDay = colorAdjust != null && colorAdjust.postExposure.value >= 0f;
+        if (lightground != null) lightground.SetActive(isDay);
+        if (darkground != null) darkground.SetActive(!isDay);
     }
 
     // changes the brightness somehow??? GPT ahh
