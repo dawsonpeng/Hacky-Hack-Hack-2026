@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Cinemachine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
@@ -6,6 +7,8 @@ public class SettingsScript : MonoBehaviour
 {
     public Volume volume;
     private ColorAdjustments colorAdjust;
+    // the game's main camera
+    public CinemachineCamera virtualCam;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -44,5 +47,12 @@ public class SettingsScript : MonoBehaviour
     public void ChangeBrightness(float value)
     {
         colorAdjust.postExposure.value = value;
+    }
+
+    // changes the camera's field of view
+    public void SetCameraFOV(float value)
+    {
+        // Debug.Log("slider changed");
+        virtualCam.Lens.OrthographicSize = value;
     }
 }
