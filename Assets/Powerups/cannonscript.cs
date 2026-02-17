@@ -46,6 +46,22 @@ public class cannonscript : MonoBehaviour
         Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position;
 
         GameObject projectile = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
+        // Keep the cannon in front without relying on sorting layers.
+        if (TryGetComponent<SpriteRenderer>(out var cannonRenderer))
+        {
+            if (projectile.TryGetComponent<SpriteRenderer>(out var projectileRenderer))
+            {
+                projectileRenderer.sortingOrder = cannonRenderer.sortingOrder - 1;
+            }
+            else
+            {
+                projectile.transform.position = new Vector3(
+                    projectile.transform.position.x,
+                    projectile.transform.position.y,
+                    transform.position.z + 1f
+                );
+            }
+        }
         if (projectileLifetime > 0f)
         {
             Destroy(projectile, projectileLifetime);
