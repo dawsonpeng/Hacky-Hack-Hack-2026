@@ -28,8 +28,8 @@ public class cannonscript : MonoBehaviour
             return;
         }
 
-        float timeScale = Mathf.Max(0.01f, Time.timeScale);
-        float fireRateScale = Mathf.Approximately(timeScale, 2f) ? 3.5f : timeScale;
+        float tickSpeed = Mathf.Max(0.01f, SettingsScript.TickSpeed);
+        float fireRateScale = Mathf.Approximately(tickSpeed, 2f) ? 5f : tickSpeed;
         float adjustedInterval = fireInterval * (1f / fireRateScale);
 
         fireTimer -= Time.unscaledDeltaTime;

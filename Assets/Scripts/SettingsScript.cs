@@ -5,6 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public class SettingsScript : MonoBehaviour
 {
+    public static float TickSpeed { get; private set; } = 1f;
     public Volume volume;
     private ColorAdjustments colorAdjust;
     // the game's main camera
@@ -61,7 +62,8 @@ public class SettingsScript : MonoBehaviour
     // sets how fast the game updates (1 = normal, 0.5 = half speed, 2 = double speed)
     public void SetTickSpeed(float tickSpeed)
     {
-        Time.timeScale = tickSpeed;
-        Time.fixedDeltaTime = baseFixedDeltaTime * tickSpeed;
+        TickSpeed = Mathf.Max(0.01f, tickSpeed);
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = baseFixedDeltaTime;
     }
 }
