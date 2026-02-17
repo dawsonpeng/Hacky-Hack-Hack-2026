@@ -7,11 +7,17 @@ public class CharacterSelectionScript : MonoBehaviour
     private const string SelectedCharacterKey = "SelectedCharacter";
 
     [SerializeField] private Image selectionPreviewImage;
+    [SerializeField] private SpriteRenderer selectionPreviewRenderer;
     [SerializeField] private Sprite chen_0Sprite;
     [SerializeField] private Sprite maleIdleSprite;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
+    {
+        ApplySavedSelectionPreview();
+    }
+
+    void OnEnable()
     {
         ApplySavedSelectionPreview();
     }
@@ -47,13 +53,24 @@ public class CharacterSelectionScript : MonoBehaviour
             return;
         }
 
+        bool applied = false;
+
         if (selectionPreviewImage != null)
         {
             selectionPreviewImage.sprite = sprite;
+            applied = true;
         }
-        else
+
+        if (selectionPreviewRenderer != null)
         {
-            Debug.LogWarning("CharacterSelectionScript: assign selectionPreviewImage (white box).");
+            selectionPreviewRenderer.sprite = sprite;
+            applied = true;
+        }
+
+        if (!applied)
+        {
+            Debug.LogWarning(
+                "CharacterSelectionScript: assign selectionPreviewImage (UI Image) or selectionPreviewRenderer (SpriteRenderer).");
         }
     }
 
