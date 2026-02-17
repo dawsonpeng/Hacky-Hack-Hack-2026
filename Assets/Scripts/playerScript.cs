@@ -26,6 +26,9 @@ public class playerScript : MonoBehaviour
     public int extraJumpsValue = 1;
     private int extraJumps;
     private int groundContacts;
+    private Vector3 checkpointPosition;
+    private bool hasCheckpoint;
+    private Color baseColor = Color.white;
 
     private AudioSource audioSource;
     public AudioClip jumpSound;
@@ -65,11 +68,17 @@ public class playerScript : MonoBehaviour
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
+        if (spriteRenderer != null)
+        {
+            baseColor = spriteRenderer.color;
+        }
         ApplySelectedCharacterSprite();
         extraJumps = extraJumpsValue;
         audioSource = GetComponent<AudioSource>();
         originalScale = spriteRenderer.size;
         targetScale = originalScale;
+        checkpointPosition = transform.position;
+        hasCheckpoint = true;
     }
 
     private void ApplyNoFrictionMaterial()
@@ -250,7 +259,34 @@ public class playerScript : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
+        if (hasCheckpoint)
+        {
+            RespawnAtCheckpoint();
+            return;
+        }
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         Invoke(nameof(ChangeScene), 2.0f);   
+    }
+
+    public void SetCheckpoint(Vector3 position)
+    {
+        checkpointPosition = position;
+        hasCheckpoint = true;
+    }
+
+    private void RespawnAtCheckpoint()
+    {
+        transform.position = checkpointPosition;
+        body.linearVelocity = Vector2.zero;
+        body.angularVelocity = 0f;
+        groundContacts = 0;
+        IsGrounded = false;
+        extraJumps = extraJumpsValue;
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = baseColor;
+        }
     }
 
     private void ApplySelectedCharacterSprite()
