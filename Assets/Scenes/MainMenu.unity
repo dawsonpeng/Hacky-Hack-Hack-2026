@@ -171,6 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f794accd4bb0044959598212bdd333ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::startGame
+  levelSelectScene: LevelSelect
+  characterSelectionScene: CharacterSelection
 --- !u!114 &52163618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,6 +1025,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f794accd4bb0044959598212bdd333ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
+  levelSelectScene: Level Select
+  characterSelectionScene: CharacterSelection
 --- !u!114 &1460284600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1232,6 +1236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f794accd4bb0044959598212bdd333ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
+  levelSelectScene: Level Select
+  characterSelectionScene: CharacterSelection
 --- !u!1 &1670133943
 GameObject:
   m_ObjectHideFlags: 0
