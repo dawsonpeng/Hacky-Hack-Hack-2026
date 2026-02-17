@@ -29,11 +29,15 @@ public class resettickspeedScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<playerScript>() == null)
+        playerScript player = other.GetComponent<playerScript>();
+        if (player == null)
         {
             return;
         }
 
+        player.SetCheckpoint(triggerCollider != null
+            ? triggerCollider.bounds.center
+            : transform.position);
         ResetTickSpeed();
 
         if (disableAfterReset)

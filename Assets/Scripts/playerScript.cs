@@ -25,6 +25,9 @@ public class playerScript : MonoBehaviour
     public int extraJumpsValue = 1;
     private int extraJumps;
     private int groundContacts;
+    private Vector3 checkpointPosition;
+    private bool hasCheckpoint;
+    private Color baseColor = Color.white;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,9 +51,15 @@ public class playerScript : MonoBehaviour
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
+        if (spriteRenderer != null)
+        {
+            baseColor = spriteRenderer.color;
+        }
         ApplySelectedCharacterSprite();
 
         extraJumps = extraJumpsValue;
+        checkpointPosition = transform.position;
+        hasCheckpoint = true;
     }
 
     private void ApplyNoFrictionMaterial()
@@ -146,7 +155,10 @@ public class playerScript : MonoBehaviour
 
     private void Die()
     {
-        spriteRenderer.color = Color.red;
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = Color.red;
+        }
         SettingsScript settings = FindObjectOfType<SettingsScript>();
         if (settings != null)
         {
@@ -156,7 +168,33 @@ public class playerScript : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
+        if (hasCheckpoint)
+        {
+            RespawnAtCheckpoint();
+            return;
+        }
+
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    public void SetCheckpoint(Vector3 position)
+    {
+        checkpointPosition = position;
+        hasCheckpoint = true;
+    }
+
+    private void RespawnAtCheckpoint()
+    {
+        transform.position = checkpointPosition;
+        body.linearVelocity = Vector2.zero;
+        body.angularVelocity = 0f;
+        groundContacts = 0;
+        IsGrounded = false;
+        extraJumps = extraJumpsValue;
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = baseColor;
+        }
     }
 
     private void ApplySelectedCharacterSprite()
