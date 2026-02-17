@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Logic
   - Death
+  - Settings
   layers:
   - Default
   - TransparentFX
