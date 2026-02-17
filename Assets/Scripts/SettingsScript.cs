@@ -9,11 +9,13 @@ public class SettingsScript : MonoBehaviour
     private ColorAdjustments colorAdjust;
     // the game's main camera
     public CinemachineCamera virtualCam;
+    private float baseFixedDeltaTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         volume.profile.TryGet(out colorAdjust);
+        baseFixedDeltaTime = Time.fixedDeltaTime;
     }
 
     // Update is called once per frame
@@ -54,5 +56,12 @@ public class SettingsScript : MonoBehaviour
     {
         // Debug.Log("slider changed");
         virtualCam.Lens.OrthographicSize = value;
+    }
+
+    // sets how fast the game updates (1 = normal, 0.5 = half speed, 2 = double speed)
+    public void SetTickSpeed(float tickSpeed)
+    {
+        Time.timeScale = tickSpeed;
+        Time.fixedDeltaTime = baseFixedDeltaTime * tickSpeed;
     }
 }
