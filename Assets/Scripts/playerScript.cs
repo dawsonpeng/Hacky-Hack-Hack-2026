@@ -108,7 +108,6 @@ public class playerScript : MonoBehaviour
     {
         float verticalVelocity = body.linearVelocity.y;
 
-        // Stretch when moving upward (jumping)
         if (verticalVelocity > 0.1f)
         {
             targetScale = new Vector2(
@@ -116,7 +115,6 @@ public class playerScript : MonoBehaviour
                 originalScale.y + stretchAmount
             );
         }
-        // Squash when landing / falling fast
         else if (verticalVelocity < -3f)
         {
             targetScale = new Vector2(
@@ -237,19 +235,8 @@ public class playerScript : MonoBehaviour
         }
     }
     
-    private void ChangeScene()
+    private void Reset()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-    }
-
-    private void Die()
-    {
-        if (IsAlive)
-        {
-            IsAlive = false;
-            spriteRenderer.color = Color.red;
-            PlayAudio(deathSound, 0.5f);
-        }
         SettingsScript settings = FindFirstObjectByType<SettingsScript>();
         if (settings != null)
         {
@@ -262,16 +249,26 @@ public class playerScript : MonoBehaviour
         if (hasCheckpoint)
         {
             RespawnAtCheckpoint();
-            return;
+        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    private void Die()
+    {
+        if (IsAlive)
+        {
+            IsAlive = false;
+            spriteRenderer.color = Color.red;
+            PlayAudio(deathSound, 0.5f);
         }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        Invoke(nameof(ChangeScene), 2.0f);   
+        Invoke(nameof(Reset), 2.0f);   
     }
 
     public void SetCheckpoint(Vector3 position)
     {
-        checkpointPosition = position;
+        Vector3 offset = new Vector3(position.x, position.y + 0.5f, 1f);
+        checkpointPosition = offset;
         hasCheckpoint = true;
     }
 
