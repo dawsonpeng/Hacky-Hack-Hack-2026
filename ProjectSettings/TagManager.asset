@@ -7,6 +7,8 @@ TagManager:
   - Logic
   - Death
   - Settings
+  serializedVersion: 2
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
+  - 
   - 
   - 
   - 
@@ -44,5 +46,3 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  m_RenderingLayers:
-  - Default
