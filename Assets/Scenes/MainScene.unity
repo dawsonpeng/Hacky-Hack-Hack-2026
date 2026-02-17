@@ -1743,8 +1743,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   isSlider: 1
-  lowestValue: 0
-  highestValue: 100
+  lowestValue: 50
+  highestValue: 1000
   isActive: 1
   popUpWindow: {fileID: 1338797023}
   powerupRenderer: {fileID: 0}
