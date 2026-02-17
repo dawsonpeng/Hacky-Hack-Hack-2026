@@ -48,7 +48,7 @@ public class playerScript : MonoBehaviour
             extraJumps = extraJumpsValue;
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
         {
             if(IsGrounded) {
                 body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
