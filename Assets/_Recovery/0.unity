@@ -1357,7 +1357,7 @@ GameObject:
   - component: {fileID: 668053169}
   - component: {fileID: 668053168}
   - component: {fileID: 668053167}
-  - component: {fileID: 668053166}
+  - component: {fileID: 668053171}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -1365,24 +1365,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &668053166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668053165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58de589dfabdc334fb3fb2514a5e05c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Trampscript
-  bounceStrength: 12
-  step: 1
-  minStrength: 0
-  maxStrength: 50
-  setVelocity: 1
-  showGUI: 1
 --- !u!61 &668053167
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1549,6 +1531,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &668053171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668053165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84defa771ded26c40b8a813af01790ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  strength: 15
+  step: 5
+  minStrength: 5
+  maxStrength: 50
 --- !u!1 &737332661
 GameObject:
   m_ObjectHideFlags: 0
