@@ -44,12 +44,16 @@ public class playerScript : MonoBehaviour
 
     private Vector2 originalScale;
     private Vector2 targetScale;
+    private float moveInput;
+    private bool jumpRequested;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        body.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        body.interpolation = RigidbodyInterpolation2D.Interpolate;
         if (applyNoFrictionMaterial)
         {
             ApplyNoFrictionMaterial();
@@ -140,30 +144,45 @@ public class playerScript : MonoBehaviour
     {
         if (IsAlive)
         {
-            float movement = Input.GetAxis("Horizontal");
-            body.linearVelocity = new Vector2(movement * moveSpeed, body.linearVelocity.y);
-
-            if (IsGrounded)
-            {
-                extraJumps = extraJumpsValue;
-            }
-
+            moveInput = Input.GetAxis("Horizontal");
             if (Input.GetKeyDown(KeyCode.W))
             {
-                if (IsGrounded)
-                {
-                    body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
-                    PlayAudio(jumpSound, 0.5f);
-                }
-                else if (extraJumps > 0)
-                {
-                    body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
-                    extraJumps--;
-                    PlayAudio(jumpSound, 0.5f);
-                }
+                jumpRequested = true;
             }
         }
         UpdateSlimeVisual();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!IsAlive)
+        {
+            return;
+        }
+
+        body.linearVelocity = new Vector2(moveInput * moveSpeed, body.linearVelocity.y);
+
+        if (IsGrounded)
+        {
+            extraJumps = extraJumpsValue;
+        }
+
+        if (jumpRequested)
+        {
+            if (IsGrounded)
+            {
+                body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
+                PlayAudio(jumpSound, 0.5f);
+            }
+            else if (extraJumps > 0)
+            {
+                body.linearVelocity = new Vector2(body.linearVelocity.x, flapStrength);
+                extraJumps--;
+                PlayAudio(jumpSound, 0.5f);
+            }
+
+            jumpRequested = false;
+        }
     }
 
     private void PlayAudio(AudioClip audioToPlay, float volume)
