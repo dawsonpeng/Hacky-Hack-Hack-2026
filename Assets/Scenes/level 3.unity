@@ -19658,7 +19658,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 2.51, y: 9.87}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -19674,7 +19674,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.7, y: 0.69, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.21912351, y: 0.07446809, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1079001532}
@@ -19748,7 +19748,7 @@ BoxCollider2D:
     oldSize: {x: 5.5, y: 7.35}
     newSize: {x: 2.51, y: 9.87}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 4.011047, y: 7.2864685}
