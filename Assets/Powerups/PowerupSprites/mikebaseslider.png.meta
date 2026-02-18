@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 847047b0f7170dc45862b7a0d268c1a6
+guid: 154a76aa099a16b40bb66b546fc07976
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3019934629951154538
-    second: pattyDragon-removebg-preview_0
+      213: -2246391795288434404
+    second: mikebaseslider_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pattyDragon-removebg-preview_0
+      name: mikebaseslider_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 18
-        width: 378
-        height: 376
+        y: 0
+        width: 500
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6965cd054790716d0800000000000000
-      internalID: -3019934629951154538
+      spriteID: c191b77609633d0e0800000000000000
+      internalID: -2246391795288434404
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pattyDragon-removebg-preview_0: -3019934629951154538
+      mikebaseslider_0: -2246391795288434404
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

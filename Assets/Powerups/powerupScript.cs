@@ -41,6 +41,24 @@ public class powerupScript : MonoBehaviour
         }
     }
 
+    public virtual void ResetPowerup()
+    {
+        if (powerupRenderer != null)
+        {
+            powerupRenderer.enabled = true;
+        }
+
+        if (triggerCollider != null)
+        {
+            triggerCollider.enabled = true;
+        }
+
+        if (popUpWindow != null)
+        {
+            popUpWindow.SetActive(false);
+        }
+    }
+
     public void CreatePopUp()
     {
         Debug.Log("Pop Up Created");

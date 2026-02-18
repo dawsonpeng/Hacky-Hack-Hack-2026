@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 73a704c7bd0e3f645a50543f1b09e52f
+guid: 3715ebd54d7cc56468daf003c110308a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6155933130404620723
-    second: mikesoundslider_0
+      213: -2597553146751170167
+    second: pattycannonballsprite-removebg-preview_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mikesoundslider_0
+      name: pattycannonballsprite-removebg-preview_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 225
-        height: 225
+        x: 58
+        y: 13
+        width: 449
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3b963da01944e6550800000000000000
-      internalID: 6155933130404620723
+      spriteID: 989c2baec23a3fbd0800000000000000
+      internalID: -2597553146751170167
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mikesoundslider_0: 6155933130404620723
+      pattycannonballsprite-removebg-preview_0: -2597553146751170167
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
