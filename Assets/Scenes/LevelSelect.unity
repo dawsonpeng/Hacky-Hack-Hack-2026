@@ -291,7 +291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.74, y: -1.21}
+  m_AnchoredPosition: {x: -7.54, y: -1.25}
   m_SizeDelta: {x: 300, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &435491513
@@ -731,11 +731,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2453925987170984633, guid: 6948d4862a4d7494abfecd1632346d4b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 8.700073
+      value: 8.868
       objectReference: {fileID: 0}
     - target: {fileID: 2453925987170984633, guid: 6948d4862a4d7494abfecd1632346d4b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4.4000244
+      value: 4.661
       objectReference: {fileID: 0}
     - target: {fileID: 2453925987170984633, guid: 6948d4862a4d7494abfecd1632346d4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -806,7 +806,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.61, y: -1.22}
+  m_AnchoredPosition: {x: -3.71, y: -1.14}
   m_SizeDelta: {x: 300, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1415184827
@@ -1452,7 +1452,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3772365423633216706, guid: 92ec8f4d6bf4da44891ccca9cc6441b7, type: 3}
+  m_Sprite: {fileID: -7185860088894091883, guid: df8ddec208962924eaeace4832a37bd6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
