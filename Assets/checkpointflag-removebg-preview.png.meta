@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 56b91d5bcf56f5248b971a6657a0feab
+guid: 03dc8d3567f54864f96d7b0ec86be2ef
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3756453439024688547
-    second: pattyfirespire1color-removebg-preview_0
-  - first:
-      213: -8119828423385073347
-    second: pattyfirespire1color-removebg-preview_1
+      213: 3040722503740622246
+    second: checkpointflag-removebg-preview_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -99,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pattyfirespire1color-removebg-preview_0
+      name: checkpointflag-removebg-preview_0
       rect:
         serializedVersion: 2
-        x: 46
-        y: 41
-        width: 808
-        height: 213
+        x: 19
+        y: 0
+        width: 218
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5293afef756edbc0800000000000000
-      internalID: -3756453439024688547
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pattyfirespire1color-removebg-preview_1
-      rect:
-        serializedVersion: 2
-        x: 445
-        y: 36
-        width: 75
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d393303d113905f80800000000000000
-      internalID: -8119828423385073347
+      spriteID: 6a50ff7b101d23a20800000000000000
+      internalID: 3040722503740622246
       vertices: []
       indices: 
       edges: []
@@ -160,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pattyfirespire1color-removebg-preview_0: -3756453439024688547
-      pattyfirespire1color-removebg-preview_1: -8119828423385073347
+      checkpointflag-removebg-preview_0: 3040722503740622246
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

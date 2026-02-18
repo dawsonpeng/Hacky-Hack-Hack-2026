@@ -37,6 +37,7 @@ public class playerScript : MonoBehaviour
 
     private bool LandSoundDebounce = false;
     public bool IsAlive = true;
+    private bool resetScheduled = false;
 
     public float squashAmount = 0.25f;
     public float stretchAmount = 0.35f;
@@ -256,6 +257,7 @@ public class playerScript : MonoBehaviour
     
     private void Reset()
     {
+        resetScheduled = false;
         SettingsScript settings = FindFirstObjectByType<SettingsScript>();
         if (settings != null)
         {
@@ -268,6 +270,9 @@ public class playerScript : MonoBehaviour
         if (hasCheckpoint)
         {
             RespawnAtCheckpoint();
+            ResetAllPowerups();
+            IsAlive = true;
+            return;
         }
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
@@ -280,8 +285,11 @@ public class playerScript : MonoBehaviour
             spriteRenderer.color = Color.red;
             PlayAudio(deathSound, 0.5f);
         }
-
-        Invoke(nameof(Reset), 2.0f);   
+        if (!resetScheduled)
+        {
+            resetScheduled = true;
+            Invoke(nameof(Reset), 2.0f);
+        }
     }
 
     public void SetCheckpoint(Vector3 position)
@@ -319,6 +327,15 @@ public class playerScript : MonoBehaviour
         if (spriteRenderer != null)
         {
             spriteRenderer.sprite = selectedSprite;
+        }
+    }
+
+    private void ResetAllPowerups()
+    {
+        powerupScript[] powerups = FindObjectsByType<powerupScript>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        for (int i = 0; i < powerups.Length; i++)
+        {
+            powerups[i].ResetPowerup();
         }
     }
 }

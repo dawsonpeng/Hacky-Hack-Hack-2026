@@ -35,9 +35,6 @@ public class resettickspeedScript : MonoBehaviour
             return;
         }
 
-        player.SetCheckpoint(triggerCollider != null
-            ? triggerCollider.bounds.center
-            : transform.position);
         ResetTickSpeed();
 
         if (disableAfterReset)
@@ -72,3 +69,4 @@ public class resettickspeedScript : MonoBehaviour
         }
     }
 }
+
