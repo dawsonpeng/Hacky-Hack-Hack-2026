@@ -26,16 +26,16 @@ public class levelselectorScript : MonoBehaviour
 
     public void level3()
     {
-        //todo
+        SceneManager.LoadScene("level 3");
     }
 
     public void level4()
     {
-        //todo
+        SceneManager.LoadScene("Level 4");
     }
     public void level5()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("Level 5");
     }
 
     public void BackToMainMenu()
